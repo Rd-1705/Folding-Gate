@@ -1,0 +1,26 @@
+﻿@{
+    var produk = ViewBag.Product;
+}
+
+<h2>Form Pemesanan</h2>
+
+<form method="post">
+    <input type="hidden" name="productId" value="@produk.ProductId" />
+
+    <label>Nama</label>
+    <input type="text" name="Nama" required />
+
+    <label>Alamat</label>
+    <textarea name="Alamat"></textarea>
+
+    <label>No HP</label>
+    <input type="text" name="NoHP" />
+
+    <label>Email</label>
+    <input type="email" name="Email" />
+
+    <label>Jumlah</label>
+    <input type="number" name="qty" value="1" />
+
+    <button type="submit">Pesan</button>
+</form>
