@@ -43,5 +43,30 @@ namespace foldingGate.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product, IFormFile uploadFoto)
+        {
+            if (uploadFoto != null && uploadFoto.Length > 0)
+            {
+                // Tentukan path penyimpanan
+                string folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/products");
+                string fileName = Guid.NewGuid().ToString() + "_" + uploadFoto.FileName;
+                string filePath = Path.Combine(folder, fileName);
+
+                // Simpan file ke folder
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadFoto.CopyToAsync(stream);
+                }
+
+                // Simpan nama file ke properti GambarUrl
+                product.Gambar = fileName;
+            }
+
+            _context.products.Add(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
