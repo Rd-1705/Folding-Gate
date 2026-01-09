@@ -1,26 +1,53 @@
-﻿@{
-    var produk = ViewBag.Product;
+﻿@model foldingGate.Models.DB.Customer
+@{
+    var product = ViewBag.Product as foldingGate.Models.DB.Product;
 }
 
-<h2>Form Pemesanan</h2>
-
-<form method="post">
-    <input type="hidden" name="productId" value="@produk.ProductId" />
-
-    <label>Nama</label>
-    <input type="text" name="Nama" required />
-
-    <label>Alamat</label>
-    <textarea name="Alamat"></textarea>
-
-    <label>No HP</label>
-    <input type="text" name="NoHP" />
-
-    <label>Email</label>
-    <input type="email" name="Email" />
-
-    <label>Jumlah</label>
-    <input type="number" name="qty" value="1" />
-
-    <button type="submit">Pesan</button>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0">Form Pemesanan Produk</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <img src="~/images/products/@product.Gambar" class="img-fluid rounded shadow-sm" alt="@product.NamaProduk">
+                        </div>
+                        <div class="col-md-8">
+                            <h5>@product.NamaProduk</h5>
+                            <p class="text-muted small">@product.Deskripsi</p>
+                            <h5 class="text-danger">Harga: Rp @product.Harga.ToString("N0")</h5>
+                        </div>
+                    </div>
+                    <hr />
+                    <form asp-action="Create" method="post">
+                        <input type="hidden" name="productId" value="@product.ProductId" />
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Nama Lengkap</label>
+                                <input asp-for="Nama" class="form-control" placeholder="Contoh: Budi Santoso" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">No. Telepon (WhatsApp)</label>
+                                <input asp-for="NoHP" class="form-control" placeholder="0812xxxx" required />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Alamat Lengkap Pemasangan</label>
+                            <textarea asp-for="Alamat" class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Jumlah (Unit/Set)</label>
+                            <input type="number" name="qty" class="form-control" value="1" min="1" required />
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">Kirim Pesanan Sekarang</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

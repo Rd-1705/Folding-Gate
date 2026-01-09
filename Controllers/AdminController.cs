@@ -24,6 +24,7 @@ namespace foldingGate.Controllers
         {
             var orders = _context.orders
                 .Include(o => o.Customer)
+                .OrderByDescending(o => o.TanggalPesan)
                 .ToList();
             return View(orders);
         }

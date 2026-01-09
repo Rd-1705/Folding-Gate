@@ -15,36 +15,6 @@ namespace foldingGate.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.products.Add(product);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(product);
-        }
-
-        public IActionResult Edit(int id) => View(_context.products.Find(id));
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            _context.products.Update(product);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var product = _context.products.Find(id);
-            _context.products.Remove(product);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
         public async Task<IActionResult> Create(Product product, IFormFile uploadFoto)
         {
             if (uploadFoto != null && uploadFoto.Length > 0)
@@ -66,6 +36,24 @@ namespace foldingGate.Controllers
 
             _context.products.Add(product);
             await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int id) => View(_context.products.Find(id));
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            _context.products.Update(product);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var product = _context.products.Find(id);
+            _context.products.Remove(product);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

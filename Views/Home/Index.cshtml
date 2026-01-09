@@ -1,8 +1,75 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<foldingGate.Models.DB.Product>
+
+@{
+    ViewData["Title"] = "Beranda";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="p-5 mb-4 bg-dark text-white rounded-3 shadow" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/images/hero-bg.jpg'); background-size: cover; background-position: center; min-height: 450px; display: flex; align-items: center;">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-4 fw-bold text-uppercase">Royal Folding Gate Pekanbaru</h1>
+        <p class="fs-4">Solusi Pintu Besi Lipat Berkualitas, Kokoh, dan Terpercaya untuk Keamanan Anda.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-warning btn-lg px-5 fw-bold rounded-pill">Lihat Katalog Produk</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row align-items: center py-5">
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-3">Mengapa Memilih Kami?</h2>
+            <p class="text-muted">Royal Folding Gate telah berpengalaman lebih dari 7 tahun dalam menyediakan layanan pemasangan pintu besi lipat profesional di wilayah Pekanbaru.</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success"></i> Material Berkualitas Tinggi</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Pengerjaan Tepat Waktu</li>
+                <li><i class="bi bi-check-circle-fill text-success"></i> Harga Kompetitif & Transparan</li>
+            </ul>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="p-4 bg-light rounded shadow-sm">
+                <h4 class="fw-bold">Butuh Konsultasi?</h4>
+                <p>Hubungi admin kami melalui WhatsApp untuk respon cepat.</p>
+                <a href="https://wa.me/6285143355686" class="btn btn-success px-4 rounded-pill"><i class="bi bi-whatsapp"></i> Chat WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="text-center fw-bold mt-5 mb-4">Produk Unggulan</h3>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                    <img src="~/images/products/@item.Gambar" class="card-img-top" alt="@item.NamaProduk" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">@item.NamaProduk</h5>
+                        <p class="card-text text-muted small text-truncate">@item.Deskripsi</p>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary btn-sm">Detail Produk</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="bg-light py-5 mt-5">
+    <div class="container text-center">
+        <h3 class="fw-bold mb-5">Mudahnya Memesan di Royal Folding Gate</h3>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="h1 text-primary">01</div>
+                <h5>Pilih Produk</h5>
+                <p class="small text-muted">Lihat spesifikasi komponen sesuai kebutuhan Anda.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="h1 text-primary">02</div>
+                <h5>Isi Form Pesanan</h5>
+                <p class="small text-muted">Masukkan alamat pemasangan dan jumlah unit.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="h1 text-primary">03</div>
+                <h5>Konfirmasi & Pasang</h5>
+                <p class="small text-muted">Admin akan menghubungi Anda untuk jadwal pemasangan.</p>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,27 @@
+﻿<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <h4 class="fw-bold mb-3">Registrasi Admin Baru</h4>
+                    <p class="text-muted small">Hanya untuk pendaftaran staf administrasi.</p>
+                    <form asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Nama Lengkap</label>
+                            <input type="text" name="NamaLengkap" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Username</label>
+                            <input type="text" name="Username" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-dark fw-bold">Password</label>
+                            <input type="password" name="Password" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100 py-2">DAFTARKAN ADMIN</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

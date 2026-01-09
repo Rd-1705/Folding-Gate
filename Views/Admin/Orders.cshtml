@@ -1,0 +1,46 @@
+﻿@model IEnumerable<foldingGate.Models.DB.Order>
+
+<div class="container-fluid mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Daftar Pemesanan Masuk</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tgl Pesan</th>
+                            <th>Pelanggan</th>
+                            <th>Total Harga</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TanggalPesan.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <strong>@item.Customer.Nama</strong><br />
+                                    <small class="text-muted">@item.Customer.NoHP</small>
+                                </td>
+                                <td class="fw-bold">Rp @item.TotalHarga.ToString("N0")</td>
+                                <td>
+                                    <span class="badge @(item.Status == "Menunggu Konfirmasi" ? "bg-warning" : "bg-success")">
+                                        @item.Status
+                                    </span>
+                                </td>
+                                <td>
+                                    <a asp-action="UpdateStatus" asp-route-id="@item.OrderId" asp-route-status="Diproses" class="btn btn-sm btn-outline-primary">Proses</a>
+                                    <a asp-action="UpdateStatus" asp-route-id="@item.OrderId" asp-route-status="Selesai" class="btn btn-sm btn-outline-success">Selesai</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
