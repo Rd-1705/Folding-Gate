@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -7,66 +6,69 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace foldingGate.Migrations
 {
     /// <inheritdoc />
-    public partial class firstmigration : Migration
+    public partial class firstsqlsever : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySql:CharSet", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nama = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Alamat = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    NoHP = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nama = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Alamat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NoHP = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_customers", x => x.CustomerId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NamaProduk = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Harga = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Deskripsi = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Gambar = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NamaProduk = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Harga = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Deskripsi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gambar = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_products", x => x.ProductId);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NamaLengkap = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.UserId);
+                });
 
             migrationBuilder.CreateTable(
                 name: "orders",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TanggalPesan = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TanggalPesan = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
-                    TotalHarga = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Status = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    TotalHarga = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,19 +79,18 @@ namespace foldingGate.Migrations
                         principalTable: "customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "orderDetails",
                 columns: table => new
                 {
                     OrderDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Qty = table.Column<int>(type: "int", nullable: false),
-                    Harga = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    Harga = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,8 +107,7 @@ namespace foldingGate.Migrations
                         principalTable: "products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_orderDetails_OrderId",
@@ -130,6 +130,9 @@ namespace foldingGate.Migrations
         {
             migrationBuilder.DropTable(
                 name: "orderDetails");
+
+            migrationBuilder.DropTable(
+                name: "users");
 
             migrationBuilder.DropTable(
                 name: "orders");

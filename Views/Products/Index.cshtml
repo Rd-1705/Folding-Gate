@@ -1,16 +1,23 @@
-﻿@using foldingGate.Models.DB
-@model IEnumerable<Product>
+﻿@model IEnumerable<foldingGate.Models.DB.Product>
 
-<h2>Katalog Produk Folding Gate</h2>
-
-@foreach (var item in Model)
-{
-    <div>
-        <h4>@item.NamaProduk</h4>
-        <p>@item.Deskripsi</p>
-        <p>Harga: Rp @item.Harga</p>
-        <a asp-controller="Orders" asp-action="Create" asp-route-productId="@item.ProductId">
-            Pesan
-        </a>
+<div class="container">
+    <h2 class="text-center my-4">Katalog Produk Royal Folding Gate</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.NamaProduk</h5>
+                        <p class="card-text text-muted">@item.Deskripsi</p>
+                        <h6 class="text-primary">Harga: Rp @item.Harga.ToString("N0")</h6>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a asp-controller="Orders" asp-action="Create" asp-route-productId="@item.ProductId"
+                           class="btn btn-success w-100">Pesan Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-}
+</div>

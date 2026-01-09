@@ -13,5 +13,6 @@ namespace foldingGate.Models
         public DbSet<Order> orders { get; set; }
         public DbSet<OrderDetail> orderDetails { get; set; }
         public DbSet<Product> products { get; set; }
+        public DbSet<User> users { get; set; }
     }
 }

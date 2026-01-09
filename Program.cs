@@ -3,17 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-
-builder.Services.AddDbContext<AppDbContext>(
-    dbContextOptions => dbContextOptions
-        .UseMySql(builder.Configuration.GetConnectionString("MySQLConnection"), serverVersion)
-    // The following three options help with debugging, but should
-    // be changed or removed for production.
-        .LogTo(Console.WriteLine, LogLevel.Information)
-        .EnableSensitiveDataLogging()
-        .EnableDetailedErrors()
-);
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -38,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Product}/{action=Index}/{id?}");
 
 app.Run();
