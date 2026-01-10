@@ -1,10 +1,12 @@
 ﻿using foldingGate.Models;
 using foldingGate.Models.DB;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace foldingGate.Controllers
 {
+    [Authorize]
     public class ProductAdminController : Controller
     {
         private readonly AppDbContext _context;

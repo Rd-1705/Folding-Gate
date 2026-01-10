@@ -1,0 +1,35 @@
+﻿@model dynamic
+@{
+    Layout = "_Layout";
+}
+
+<div class="container-fluid mt-4">
+    <h2 class="mb-4">Dashboard @User.Identity.Name</h2>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card bg-primary text-white shadow">
+                <div class="card-body">
+                    <h5>Total Produk</h5>
+                    <h3>@ViewBag.TotalProducts</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body">
+                    <h5>Pesanan Selesai</h5>
+                    <h3>@ViewBag.OrdersCompleted</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card bg-warning text-dark shadow">
+                <div class="card-body">
+                    <h5>Menunggu Proses</h5>
+                    <h3>@ViewBag.PendingOrders</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

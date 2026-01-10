@@ -1,0 +1,22 @@
+﻿@model foldingGate.Models.DB.Order
+
+<div class="container mt-5">
+    <div class="card shadow border-0 p-5 text-center">
+        <h2 class="fw-bold">Konfirmasi Pembayaran</h2>
+        <p>Silakan selesaikan pembayaran untuk pesanan #@Model.OrderId</p>
+        <h1 class="text-primary mt-3">Rp @Model.TotalHarga.ToString("N0")</h1>
+
+        <button id="pay-button" class="btn btn-success btn-lg px-5 mt-4 rounded-pill">Bayar Sekarang</button>
+    </div>
+</div>
+
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-xxxxxxxxxxxx"></script>
+<script type="text/javascript">
+    document.getElementById('pay-button').onclick = function () {
+        window.snap.pay('@Model.SnapToken', {
+            onSuccess: function (result) { window.location.href = '/Orders/Success'; },
+            onPending: function (result) { alert("Menunggu pembayaran Anda."); },
+            onError: function (result) { alert("Pembayaran gagal!"); }
+        });
+    };
+</script>

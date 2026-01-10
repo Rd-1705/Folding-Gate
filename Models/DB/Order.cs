@@ -1,4 +1,7 @@
-﻿namespace foldingGate.Models.DB
+﻿using System;
+using System.Collections.Generic;
+
+namespace foldingGate.Models.DB
 {
     public class Order
     {
@@ -8,7 +11,9 @@
         public decimal TotalHarga { get; set; }
         public string Status { get; set; }
 
-        public Customer Customer { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public string? SnapToken { get; set; }
+
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
